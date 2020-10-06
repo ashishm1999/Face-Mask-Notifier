@@ -7,17 +7,17 @@ import cv2
 import os
 
 
-prototxtPath=os.path.sep.join([r'C:\Users\ashis\OneDrive\Documents\Mask Detection\Mask-Detection-and-Recognition-using-Deep-Learning-Keras-master','deploy.prototxt'])
-weightsPath=os.path.sep.join([r'C:\Users\ashis\OneDrive\Documents\Mask Detection\Mask-Detection-and-Recognition-using-Deep-Learning-Keras-master','res10_300x300_ssd_iter_140000.caffemodel'])
+prototxtPath=os.path.sep.join([r'C:\Users\ashis\OneDrive\Documents\Mask Detection','deploy.prototxt'])
+weightsPath=os.path.sep.join([r'C:\Users\ashis\OneDrive\Documents\Mask Detection','res10_300x300_ssd_iter_140000.caffemodel'])
 
 
 
 net=cv2.dnn.readNet(prototxtPath,weightsPath)
 
 
-model=load_model(r'C:\Users\ashis\OneDrive\Documents\Mask Detection\Mask-Detection-and-Recognition-using-Deep-Learning-Keras-master\mobilenet_v2.model')
+model=load_model(r'C:\Users\ashis\OneDrive\Documents\Mask Detection\mobilenet_v2.model')
 
-image=cv2.imread(r'C:\Users\ashis\OneDrive\Documents\Mask Detection\Mask-Detection-and-Recognition-using-Deep-Learning-Keras-master\12.png')
+image=cv2.imread(r'C:\Users\ashis\OneDrive\Documents\Mask Detection\12.png')
 
 
 (h,w)=image.shape[:2]
@@ -46,7 +46,7 @@ for i in range(0,detections.shape[2]):
         (endX,endY)=(min(w-1,endX), min(h-1,endY))
         
         
-        #extract the face ROI, convert it from BGR to RGB channel, resize it to 224,224 and preprocess it
+       
         face=image[startY:endY, startX:endX]
         face=cv2.cvtColor(face,cv2.COLOR_BGR2RGB)
         face=cv2.resize(face,(224,224))
@@ -56,7 +56,7 @@ for i in range(0,detections.shape[2]):
         
         (mask,withoutMask)=model.predict(face)[0]
         
-        #determine the class label and color we will use to draw the bounding box and text
+       
         label='Mask' if mask>withoutMask else 'No Mask'
         color=(0,255,0) if label=='Mask' else (0,0,255)
         
