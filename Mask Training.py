@@ -22,7 +22,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 
 
-dataset=r'C:\Users\ashis\OneDrive\Documents\Mask Detection\Mask-Detection-and-Recognition-using-Deep-Learning-Keras-master\dataset'
+dataset=r'C:\Users\ashis\OneDrive\Documents\Mask Detection\dataset'
 imagePaths=list(paths.list_images(dataset))
 
 
@@ -89,7 +89,7 @@ H=model.fit(
 )
 
 
-model.save(r'C:\Users\ashis\OneDrive\Documents\Mask Detection\Mask-Detection-and-Recognition-using-Deep-Learning-Keras-master\mobilenet_v2.model')
+model.save(r'C:\Users\ashis\OneDrive\Documents\Mask Detection\mobilenet_v2.model')
 
 predict=model.predict(test_X,batch_size=BS)
 predict=np.argmax(predict,axis=1)
@@ -109,5 +109,5 @@ plt.title("Training Loss and Accuracy")
 plt.xlabel("Epoch #")
 plt.ylabel("Loss/Accuracy")
 plt.legend(loc="lower left")
-plt.savefig(r'C:\Users\ashis\OneDrive\Documents\Mask Detection\Mask-Detection-and-Recognition-using-Deep-Learning-Keras-master\plot_v2.png')
+plt.savefig(r'C:\Users\ashis\OneDrive\Documents\Mask Detection\plot_v2.png')
 
