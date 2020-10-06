@@ -35,7 +35,7 @@ def detect_and_predict_mask(frame,faceNet,maskNet):
             box=detections[0,0,i,3:7]*np.array([w,h,w,h])
             (startX,startY,endX,endY)=box.astype('int')
         
-            #ensure the bounding boxes fall within the dimensions of the frame
+      
             (startX,startY)=(max(0,startX),max(0,startY))
             (endX,endY)=(min(w-1,endX), min(h-1,endY))
         
@@ -58,21 +58,20 @@ def detect_and_predict_mask(frame,faceNet,maskNet):
 
 
 
-prototxtPath=os.path.sep.join([r'C:\Users\ashis\OneDrive\Documents\Mask Detection\Mask-Detection-and-Recognition-using-Deep-Learning-Keras-master','deploy.prototxt'])
-weightsPath=os.path.sep.join([r'C:\Users\ashis\OneDrive\Documents\Mask Detection\Mask-Detection-and-Recognition-using-Deep-Learning-Keras-master','res10_300x300_ssd_iter_140000.caffemodel'])
+prototxtPath=os.path.sep.join([r'C:\Users\ashis\OneDrive\Documents\Mask Detection','deploy.prototxt'])
+weightsPath=os.path.sep.join([r'C:\Users\ashis\OneDrive\Documents\Mask Detection','res10_300x300_ssd_iter_140000.caffemodel'])
 
 
 faceNet=cv2.dnn.readNet(prototxtPath,weightsPath)
 
 
-maskNet=load_model(r'C:\Users\ashis\OneDrive\Documents\Mask Detection\Mask-Detection-and-Recognition-using-Deep-Learning-Keras-master\mobilenet_v2.model')
+maskNet=load_model(r'C:\Users\ashis\OneDrive\Documents\Mask Detection\mobilenet_v2.model')
 
 
 vs=VideoStream(src=0).start()
 
 while True:
-    #grab the frame from the threaded video stream and resize it
-    #to have a maximum width of 400 pixels
+    
     frame=vs.read()
     frame=imutils.resize(frame,width=400)
     
